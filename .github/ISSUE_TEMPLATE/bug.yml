@@ -1,0 +1,105 @@
+name: Bug report
+description: Reportar un comportamiento incorrecto o una regresión
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Gracias por reportar el problema. No incluyas contraseñas, tokens, secretos, archivos `.env` ni datos personales sensibles.
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Ambiente
+      description: ¿Dónde ocurre el problema?
+      options:
+        - Local
+        - DEV
+        - QA / Testing
+        - Producción
+        - CI/CD
+        - No aplica / No determinado
+    validations:
+      required: true
+
+  - type: input
+    id: component
+    attributes:
+      label: Componente o servicio
+      description: Repositorio, microservicio, aplicación o componente afectado.
+      placeholder: Ej. python-api-gateway, mobile, Kafka, Traefik
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Descripción
+      description: Explicá qué está ocurriendo.
+      placeholder: Describí el problema de forma concreta.
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Pasos para reproducir
+      description: Indicá una secuencia mínima y reproducible cuando sea posible.
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Comportamiento esperado
+      description: ¿Qué debería haber ocurrido?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Comportamiento actual
+      description: ¿Qué ocurrió realmente?
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidencia y logs sanitizados
+      description: Pegá únicamente logs, errores, capturas o trazas relevantes y sin secretos.
+      render: text
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: Versión, commit o imagen
+      description: SHA, tag, versión de app o imagen Docker afectada, si se conoce.
+      placeholder: Ej. sha-abc1234, v0.5.0
+    validations:
+      required: false
+
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impacto
+      description: Indicá usuarios, servicios, datos o flujos afectados.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Verificaciones
+      options:
+        - label: Verifiqué que no estoy incluyendo secretos, credenciales, tokens ni datos sensibles.
+          required: true
+        - label: Busqué si ya existe un issue equivalente.
+          required: true
