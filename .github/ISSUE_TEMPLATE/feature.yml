@@ -1,0 +1,75 @@
+name: Feature or improvement
+description: Proponer una funcionalidad nueva o una mejora
+title: "[Feature]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Usá este formulario para proponer funcionalidades o mejoras concretas. Evitá incluir información sensible.
+
+  - type: input
+    id: component
+    attributes:
+      label: Componente o servicio
+      description: Repositorio, microservicio, aplicación o área afectada.
+      placeholder: Ej. python-api-gateway, mobile, invoice extractor
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problema o necesidad
+      description: ¿Qué problema querés resolver y por qué importa?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Propuesta
+      description: Describí la solución o comportamiento esperado sin asumir una implementación específica si no es necesaria.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Criterios de aceptación
+      description: ¿Qué condiciones deberían cumplirse para considerar terminada la mejora?
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: impact
+    attributes:
+      label: Áreas potencialmente afectadas
+      options:
+        - label: API o contratos externos
+        - label: Kafka o Protobuf
+        - label: Base de datos o migraciones
+        - label: Mobile / UX
+        - label: Autenticación, autorización o seguridad
+        - label: Infraestructura, Docker, Traefik o CI/CD
+        - label: kt-curupi-commons o dependencias compartidas
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencias o consideraciones
+      description: Indicá dependencias con otros servicios, PRs, infraestructura o decisiones de arquitectura.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Verificaciones
+      options:
+        - label: Busqué si ya existe una propuesta equivalente.
+          required: true
+        - label: La propuesta no contiene secretos ni datos sensibles.
+          required: true
