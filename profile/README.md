@@ -2,79 +2,82 @@
 
 **Equipo académico de UTEC · Uruguay 🇺🇾**
 
-Kairós Tech es un equipo de desarrollo de software formado en el marco de la **Licenciatura en Tecnologías de la Información de la Universidad Tecnológica del Uruguay (UTEC)**.
+Somos un equipo de la **Licenciatura en Tecnologías de la Información de UTEC**. Construimos **Curupí**, una plataforma académica/experimental para digitalizar y trazabilizar el ciclo de comprobantes y documentos: desde la captura en mobile hasta la validación, firma, auditoría y almacenamiento.
 
-Actualmente desarrollamos **Curupí**, un proyecto académico orientado a complementar y modernizar procesos de gestión documental y administrativa mediante una aplicación móvil y una arquitectura de servicios desacoplados.
+## 🌿 ¿Qué problema resuelve Curupí?
 
-## 🌿 Curupí
+Curupí busca reducir tareas manuales y errores en procesos administrativos con múltiples sistemas y formatos de comprobantes.
 
-Curupí trabaja sobre áreas como:
+Capacidades principales:
 
-- Gestión de documentos y comprobantes.
-- Digitalización y análisis de comprobantes.
-- Extracción de información mediante OCR.
-- Procesos de firma electrónica.
-- Identidad, autenticación y autorización.
-- Trazabilidad y auditoría de operaciones.
-- Asistencia basada en inteligencia artificial.
-- Experiencia mobile para distintos perfiles de usuario.
+- **Mobile (`curupi-mobile`)** para captura y seguimiento de operaciones.
+- **Gateway (`python-api-gateway`)** como borde HTTP público y orquestación inicial.
+- **Identidad (`python-identity`)** para autenticación/autorización e integración institucional.
+- **Comprobantes y OCR (`python-invoice-extractor`, `python-invoices`, `python-cfe`)** para extracción, análisis y resolución.
+- **Archivos (`python-file-service`)** para gestión de binarios.
+- **Firma (`python-signature`)** para flujos de firma electrónica.
+- **Auditoría (`python-audit-service`)** para trazabilidad funcional y de seguridad.
+- **Infraestructura y datos (`kt-curupi-infra`, `kt-curupi-database-core`, `python-syncdb`)** para operación y proyecciones.
 
-## 🏗️ Arquitectura y tecnologías
+## 🏗️ Arquitectura (visión rápida)
 
-El proyecto se desarrolla con una arquitectura distribuida y comunicación orientada a eventos.
+```mermaid
+flowchart LR
+    M[Mobile] --> G[API Gateway]
+    G --> K[Kafka]
+    K --> S[Microservicios]
+    S --> P[(PostgreSQL)]
+    S --> O[(MongoDB)]
+    S --> I[(MinIO)]
+```
 
-**Backend**
+### Principios de arquitectura
 
-- Python
-- FastAPI
-- Kafka
-- PostgreSQL
-- Redis
-- Protobuf
+- **Gateway como borde público**: los servicios de negocio internos no exponen API pública directa.
+- **Kafka + Protobuf para integración interna**: contratos versionados y comunicación orientada a eventos.
+- **PostgreSQL como fuente transaccional** de verdad.
+- **MongoDB como read model** para consultas y proyecciones.
+- **MinIO para binarios** (archivos/documentos).
+- **Infisical para gestión de secretos** y configuración sensible.
+- **Servicios internos** orientados a casos de uso, desacoplados del canal público.
 
-**Mobile**
+## 🚀 Por dónde empezar
 
-- React Native
-- Expo
-- TypeScript
+### 1) Entrada funcional
 
-**Infraestructura y observabilidad**
+- [API Gateway (`python-api-gateway`)](../python-api-gateway)
+- [App Mobile (`curupi-mobile`)](../curupi-mobile)
+- [Identidad (`python-identity`)](../python-identity)
 
-- Docker y Docker Compose
-- Traefik
-- GitHub Actions
-- Grafana
-- Loki
-- Tempo
+### 2) Flujo de comprobantes
 
-**Procesamiento e IA**
+- [Extractor OCR (`python-invoice-extractor`)](../python-invoice-extractor)
+- [Servicio de comprobantes (`python-invoices`)](../python-invoices)
+- [Integración CFE/FEU (`python-cfe`)](../python-cfe)
 
-- OCR
-- Modelos de visión
-- Large Language Models
-- Procesamiento automatizado de documentos
+### 3) Soporte transversal
 
-## 🔐 Ingeniería
+- [File Service (`python-file-service`)](../python-file-service)
+- [Firma (`python-signature`)](../python-signature)
+- [Auditoría (`python-audit-service`)](../python-audit-service)
+- [Sync relacional→read model (`python-syncdb`)](../python-syncdb)
+- [Commons y contratos (`kt-curupi-commons`)](../kt-curupi-commons)
+- [Migraciones/core de base (`kt-curupi-database-core`)](../kt-curupi-database-core)
+- [Infraestructura local (`kt-curupi-infra`)](../kt-curupi-infra)
 
-El desarrollo de Curupí contempla prácticas de ingeniería orientadas a seguridad, mantenibilidad y reproducibilidad, incluyendo:
+### 4) Productividad y calidad
 
-- CI/CD.
-- Tests automatizados.
-- Gestión segura de secretos.
-- Contenedores reproducibles.
-- Observabilidad.
-- Autenticación y autorización.
-- Auditoría.
-- Versionado de dependencias y contratos.
-- Separación de redes y servicios internos.
+- [Automatización QA (`curupi-qa-automation`)](../curupi-qa-automation)
+- [Plantilla base Python (`python-template`)](../python-template)
+- [Cliente API para pruebas (`curupi-api-client`)](../curupi-api-client)
 
-## 🎓 Contexto
+## 📌 Estado del proyecto
 
-Kairós Tech nace como equipo académico de **UTEC**. Curupí se encuentra actualmente en desarrollo como parte de nuestro proceso de formación y aplicación práctica de ingeniería de software.
+Curupí está en **desarrollo académico/experimental**. Algunas integraciones y validaciones dependen de ambientes externos o credenciales institucionales (por ejemplo **ANEP/CAS**, **FEU**, **DGI** y **Firma.gub.uy**), por lo que la disponibilidad de ciertos flujos puede variar según el entorno.
 
 ---
 
 <p align="center">
   <strong>Kairós Tech 🇺🇾</strong><br>
-  Software Engineering · Distributed Systems · Mobile · AI
+  Ingeniería de software · Sistemas distribuidos · Mobile · IA aplicada
 </p>
