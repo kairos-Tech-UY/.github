@@ -1,0 +1,6 @@
+{
+  "name": "Validate PR title (Conventional Commits)",
+  "description": "Checks that pull request titles follow Conventional Commits for consistent review and Release Please versioning.",
+  "iconName": "check-circle",
+  "categories": ["Continuous integration"]
+}
