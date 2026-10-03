@@ -1,61 +1,44 @@
-## Resumen
+## Problema y propósito
 
-<!-- Explicá brevemente qué cambia este PR y por qué es necesario. -->
-
-## Tipo de cambio
-
-- [ ] Feature
-- [ ] Bug fix
-- [ ] Refactor
-- [ ] Seguridad
-- [ ] Infraestructura / CI-CD
-- [ ] Documentación
-- [ ] Dependencias
-- [ ] Otro
+<!-- Qué problema aborda el cambio y por qué es necesario. -->
 
 ## Cambios realizados
 
-<!-- Enumerá los cambios principales. -->
+<!-- Cambios principales y repositorios/componentes afectados. -->
 
--
+## Tipo de cambio
 
-## Cómo se probó
+- [ ] `feat` — funcionalidad
+- [ ] `fix` — corrección
+- [ ] `docs` — documentación
+- [ ] `refactor` — refactorización
+- [ ] `test` — pruebas
+- [ ] `build` / `ci` — compilación o integración continua
+- [ ] `chore` — mantenimiento
 
-<!-- Indicá tests ejecutados, validaciones manuales y resultados relevantes. -->
+## Validación
 
-```text
-Comando o procedimiento de prueba:
-
-Resultado:
-```
+<!-- Comandos ejecutados y resultados. Indicá validaciones que no fue posible ejecutar y el motivo. -->
 
 ## Impacto y compatibilidad
 
-Marcá lo que corresponda:
+- [ ] API o cliente
+- [ ] Evento, topic Kafka o contrato Protobuf
+- [ ] Esquema o migración de base de datos
+- [ ] `kt-curupi-commons` u otra dependencia compartida
+- [ ] Autenticación, autorización, cifrado o secretos
+- [ ] Infraestructura, Docker, redes o despliegue
+- [ ] Sin impacto conocido
 
-- [ ] Modifica una API, endpoint o contrato externo.
-- [ ] Modifica eventos, topics o contratos Kafka/Protobuf.
-- [ ] Requiere migración de base de datos.
-- [ ] Agrega o modifica variables de entorno/configuración.
-- [ ] Modifica dependencias compartidas o `kt-curupi-commons`.
-- [ ] Afecta autenticación, autorización, cifrado o manejo de secretos.
-- [ ] Afecta infraestructura, redes, Docker, Traefik o despliegue.
-- [ ] No tiene impacto de compatibilidad conocido.
+<!-- Consumidores afectados, compatibilidad, migración y orden de despliegue. -->
 
-Si marcaste alguna opción de impacto, describila:
+## Revisión y operación
 
-<!-- Qué consumidores, servicios, datos o ambientes pueden verse afectados. -->
+- [ ] Revisé el diff y eliminé cambios ajenos al alcance.
+- [ ] Los checks obligatorios de CI pasan.
+- [ ] Se solicitó al menos una revisión independiente.
+- [ ] Actualicé documentación, configuración y tests cuando corresponde.
+- [ ] No incluí secretos ni datos sensibles.
+- [ ] No quedan pasos manuales de despliegue sin documentar.
 
-## Checklist
-
-- [ ] El cambio está limitado al alcance del PR.
-- [ ] Revisé mi propio diff antes de solicitar review.
-- [ ] Los tests relevantes pasan localmente o en CI.
-- [ ] No incluí secretos, credenciales, tokens ni datos sensibles.
-- [ ] Actualicé documentación/configuración cuando corresponde.
-- [ ] Verifiqué compatibilidad con consumidores o servicios afectados.
-- [ ] No requiere pasos manuales de despliegue no documentados.
-
-## Notas para revisión o despliegue
-
-<!-- Riesgos, orden de despliegue, dependencias entre PRs o cualquier detalle que el reviewer deba conocer. -->
+<!-- Riesgos, ADR, rollout/rollback o seguimiento posterior. -->
