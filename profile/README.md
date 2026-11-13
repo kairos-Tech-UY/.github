@@ -17,6 +17,7 @@ Capacidades principales:
 - **Archivos (`python-file-service`)** para gestión de binarios.
 - **Firma (`python-signature`)** para flujos de firma electrónica.
 - **Auditoría (`python-audit-service`)** para trazabilidad funcional y de seguridad.
+- **IA aplicada (`python-ai-service`)** para redactar, con modelo local (Ollama/Qwen3) y hechos acotados, el resumen del Acta de Cierre de Gestión.
 - **Infraestructura y datos (`kt-curupi-infra`, `kt-curupi-database-core`, `python-syncdb`)** para operación y proyecciones.
 
 ## 🏗️ Arquitectura (visión rápida)
@@ -25,10 +26,13 @@ Capacidades principales:
 flowchart LR
     M[Mobile] --> G[API Gateway]
     G --> K[Kafka]
+    G -.idempotencia / cache.-> R[(Redis)]
     K --> S[Microservicios]
     S --> P[(PostgreSQL)]
     S --> O[(MongoDB)]
     S --> I[(MinIO)]
+    S -->|HTTP interno| AI[AI Service]
+    AI --> OL[(Ollama / Qwen3, local)]
 ```
 
 ### Principios de arquitectura
@@ -38,8 +42,10 @@ flowchart LR
 - **PostgreSQL como fuente transaccional** de verdad.
 - **MongoDB como read model** para consultas y proyecciones.
 - **MinIO para binarios** (archivos/documentos).
+- **Redis para idempotencia HTTP, caché y correlación de respuestas** síncronas sobre el bus de eventos.
 - **Infisical para gestión de secretos** y configuración sensible.
 - **Servicios internos** orientados a casos de uso, desacoplados del canal público.
+- **IA con hechos acotados, no texto libre**: el modelo local organiza y redacta, pero nunca decide cifras ni reemplaza la lógica administrativa determinista.
 
 ## 🚀 Por dónde empezar
 
@@ -60,6 +66,7 @@ flowchart LR
 - [File Service (`python-file-service`)](../python-file-service)
 - [Firma (`python-signature`)](../python-signature)
 - [Auditoría (`python-audit-service`)](../python-audit-service)
+- [IA aplicada (`python-ai-service`)](../python-ai-service)
 - [Sync relacional→read model (`python-syncdb`)](../python-syncdb)
 - [Commons y contratos (`kt-curupi-commons`)](../kt-curupi-commons)
 - [Migraciones/core de base (`kt-curupi-database-core`)](../kt-curupi-database-core)
