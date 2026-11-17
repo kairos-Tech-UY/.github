@@ -20,7 +20,7 @@ Para cada rama base se recomienda protección que exija Pull Request, una aproba
 - El API Gateway es el único borde HTTP funcional para la aplicación móvil; los servicios internos se comunican mediante los contratos acordados. Healthchecks y métricas internas son interfaces operativas.
 - Los mensajes Kafka deben tener identificadores de evento y correlación, timestamps, emisor, tipo y payload tipado. Los request/reply requieren timeout, correlación, idempotencia y errores normalizados. Los cambios Protobuf deben analizar compatibilidad con productores y consumidores.
 - PostgreSQL es la fuente de verdad transaccional declarada y MongoDB se reserva para proyecciones de lectura. Los cambios deben tener dueño, migración compatible y comportamiento idempotente.
-- MinIO almacena binarios; la metadata funcional pertenece a PostgreSQL. Los mecanismos temporales de compatibilidad deben tener plan y criterio de retiro.
+- RustFS almacena binarios; la metadata funcional pertenece a PostgreSQL. Los mecanismos temporales de compatibilidad (ej. variables de entorno heredadas con nombre `minio` tras la migración a RustFS) deben tener plan y criterio de retiro.
 - `kt-curupi-commons` contiene contratos e infraestructura reutilizable. Cada actualización debe documentar compatibilidad, versión y coordinación de adopción entre servicios.
 - Secretos se obtienen desde el gestor definido por ambiente. No deben existir credenciales compartidas, claves por defecto ni secretos reales en archivos versionados, imágenes o logs.
 - Integraciones institucionales y externas se encapsulan tras puertos/adaptadores. Los resultados obtenidos en sandbox no demuestran por sí solos disponibilidad ni aceptación productiva.
