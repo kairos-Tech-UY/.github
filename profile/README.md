@@ -30,7 +30,7 @@ flowchart LR
     K --> S[Microservicios]
     S --> P[(PostgreSQL)]
     S --> O[(MongoDB)]
-    S --> I[(MinIO)]
+    S --> I[(RustFS)]
     S -->|HTTP interno| AI[AI Service]
     AI --> OL[(Ollama / Qwen3, local)]
 ```
@@ -41,11 +41,18 @@ flowchart LR
 - **Kafka + Protobuf para integración interna**: contratos versionados y comunicación orientada a eventos.
 - **PostgreSQL como fuente transaccional** de verdad.
 - **MongoDB como read model** para consultas y proyecciones.
-- **MinIO para binarios** (archivos/documentos).
+- **RustFS para binarios** (archivos/documentos), compatible S3. Reemplazó al contenedor MinIO en 2026-10 bajo el mismo protocolo; por compatibilidad, algunas variables de entorno heredadas siguen nombradas `minio` (`MINIO_BUCKET`, `STORAGE_BACKEND=minio`).
 - **Redis para idempotencia HTTP, caché y correlación de respuestas** síncronas sobre el bus de eventos.
 - **Infisical para gestión de secretos** y configuración sensible.
 - **Servicios internos** orientados a casos de uso, desacoplados del canal público.
 - **IA con hechos acotados, no texto libre**: el modelo local organiza y redacta, pero nunca decide cifras ni reemplaza la lógica administrativa determinista.
+
+### ¿Por qué este stack?
+
+- **React Native + Expo (mobile)**: una sola base de código para Android e iOS, con acceso nativo a cámara y almacenamiento vía módulos de Expo, sin mantener dos apps nativas separadas con el equipo y tiempo disponibles.
+- **TypeScript (mobile y tooling)**: tipado estático sobre JavaScript para detectar errores de contrato (formularios, respuestas de API) en tiempo de compilación en vez de en producción.
+- **FastAPI/Python (microservicios backend)**: async nativo, validación de esquemas vía Pydantic integrada al framework, y tipado que reduce errores de contrato entre el gateway y los servicios internos. Python además es el lenguaje con mejor soporte de librerías de OCR/ML usadas acá (PaddleOCR, cliente Ollama).
+- **PaddleOCR (extracción OCR)**: modelo pre-entrenado, no se entrena uno propio. Buen desempeño en texto impreso y manuscrito sin requerir GPU dedicada ni dataset de entrenamiento propio; se evalúa (no se reentrena) contra un dataset real de 981 comprobantes.
 
 ## 🚀 Por dónde empezar
 
